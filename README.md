@@ -16,6 +16,27 @@ An on-chain **repo market on Robinhood Chain**: fixed-term, fixed-rate loans in 
 
 > Not affiliated with or endorsed by Robinhood. "Robinhood Chain" is only the name of the network this protocol runs on.
 
+## Mainnet deployment (Robinhood Chain, 4663)
+
+Deployed 2026-10-09. Admin of every contract is the 48h Timelock; the deployer has renounced admin. Source is verified on [Sourcify](https://sourcify.dev) (chain 4663). Full list: [deployments/4663.json](deployments/4663.json).
+
+| Contract | Address |
+|---|---|
+| AuctionHouse | [`0xD5FC53bC7772B9AD1b2d3dfe95397c9369Dbc739`](https://robinhoodchain.blockscout.com/address/0xD5FC53bC7772B9AD1b2d3dfe95397c9369Dbc739) |
+| TermRegistry | [`0x92F6cD65752ae06c5d7fb0311d09fBA309081D74`](https://robinhoodchain.blockscout.com/address/0x92F6cD65752ae06c5d7fb0311d09fBA309081D74) |
+| RepoLocker | [`0xFf6d1d433295faB8c6A62124e755cB93cD00F45b`](https://robinhoodchain.blockscout.com/address/0xFf6d1d433295faB8c6A62124e755cB93cD00F45b) |
+| RepoNote | [`0x9Df26E8eb8956A800029eDde18553CE11685dD64`](https://robinhoodchain.blockscout.com/address/0x9Df26E8eb8956A800029eDde18553CE11685dD64) |
+| MarginEngine | [`0x0cCF30C9B5F3635aE123b679854eaE82D92806CA`](https://robinhoodchain.blockscout.com/address/0x0cCF30C9B5F3635aE123b679854eaE82D92806CA) |
+| Liquidator | [`0x15B038a3aa78fa0Adcd65D7e380B5c3e3211b989`](https://robinhoodchain.blockscout.com/address/0x15B038a3aa78fa0Adcd65D7e380B5c3e3211b989) |
+| NoteMarket | [`0xf57E9fb6a7d6890863b1d72BF6F33BFF40E4C4f9`](https://robinhoodchain.blockscout.com/address/0xf57E9fb6a7d6890863b1d72BF6F33BFF40E4C4f9) |
+| MarketClock | [`0x129f07E15e780528bA4E8FaeB76B1f25CF7AE03a`](https://robinhoodchain.blockscout.com/address/0x129f07E15e780528bA4E8FaeB76B1f25CF7AE03a) |
+| OracleAdapter | [`0xeDb013811f8c399ADD6fD5c867a536678De99999`](https://robinhoodchain.blockscout.com/address/0xeDb013811f8c399ADD6fD5c867a536678De99999) |
+| FeeCollector | [`0x8FE27C8f7c08011d940612968F768624A875b0D5`](https://robinhoodchain.blockscout.com/address/0x8FE27C8f7c08011d940612968F768624A875b0D5) |
+| ProjectTokenHooks | [`0x0d6fdD1E5E8dB7C18Dd4203107cb27866dA793F3`](https://robinhoodchain.blockscout.com/address/0x0d6fdD1E5E8dB7C18Dd4203107cb27866dA793F3) |
+| ComplianceRegistry | [`0x3fE1b810F121Cb924Fa0f303451ABB3df0F2773b`](https://robinhoodchain.blockscout.com/address/0x3fE1b810F121Cb924Fa0f303451ABB3df0F2773b) |
+| Timelock | [`0x4bBE55070bb883FcF774BF6Dc40301cD78e76F02`](https://robinhoodchain.blockscout.com/address/0x4bBE55070bb883FcF774BF6Dc40301cD78e76F02) |
+| ClearingLib (library) | [`0xb5ba3e949805a5F8366495110D2EaacED4cC78bE`](https://robinhoodchain.blockscout.com/address/0xb5ba3e949805a5F8366495110D2EaacED4cC78bE) |
+
 ## Repository layout
 
 ```

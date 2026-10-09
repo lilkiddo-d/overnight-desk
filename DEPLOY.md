@@ -53,6 +53,10 @@ cd contracts && forge script script/Deploy.s.sol:Deploy --rpc-url $ROBINHOOD_RPC
 cd contracts && forge script script/Deploy.s.sol:Deploy --rpc-url $ROBINHOOD_RPC_URL --sender $(cast wallet address --account overnightdesk-deployer)
 ```
 
+
+> **Verification note:** the Blockscout API is behind a Cloudflare bot challenge that blocks CLI clients, so `--verify --verifier blockscout` does nothing. Verify on Sourcify instead (Blockscout imports from it). Run this per contract from `contracts/`; AuctionHouse needs `--libraries src/libraries/ClearingLib.sol:ClearingLib:<lib address>`:
+> `forge verify-contract <address> src/core/AuctionHouse.sol:AuctionHouse --chain-id 4663 --verifier sourcify --libraries src/libraries/ClearingLib.sol:ClearingLib:<lib>`
+
 ## 3. Later: wire the $OVND token (after it launches)
 
 This goes through the 48h Timelock and is sent by the `TIMELOCK_PROPOSER`. Shown here with the deployer keystore, which is the proposer if you didn't override it. See TOKEN_INTEGRATION.md for details.
