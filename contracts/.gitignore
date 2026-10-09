@@ -5,3 +5,6 @@ broadcast/*/*/dry-run/
 slither-report.json
 slither.txt
 lcov.info
+broadcast/*/31337/
+broadcast/*/*/dry-run/
+broadcast/**/*.recovery.lock
