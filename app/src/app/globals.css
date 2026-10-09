@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0b0e11;
+  --color-panel: #12161b;
+  --color-panel2: #1a2027;
+  --color-line: #252c35;
+  --color-fg: #e6e9ee;
+  --color-muted: #8b95a3;
+  --color-accent: #22c55e;
+  --color-good: #34d399;
+  --color-warn: #fbbf24;
+  --color-bad: #f87171;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    background: var(--color-bg);
+    color: var(--color-fg);
+  }
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-line bg-panel p-4;
+  }
+  .input {
+    @apply w-full min-w-0 rounded-lg border border-line bg-panel2 px-3 py-2 text-sm tabular-nums text-fg outline-none placeholder:text-muted focus:border-accent;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-[#04130a] transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center rounded-lg border border-line bg-panel2 px-4 py-2 text-sm font-medium text-fg transition hover:border-muted disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .btn-danger {
+    @apply inline-flex items-center justify-center rounded-lg border border-red-500/40 bg-red-500/10 px-4 py-2 text-sm font-medium text-red-200 transition hover:bg-red-500/20 disabled:cursor-not-allowed disabled:opacity-40;
+  }
+  .badge {
+    @apply inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium;
+  }
+  .table {
+    @apply w-full text-left text-sm;
+  }
+  .table th {
+    @apply whitespace-nowrap border-b border-line px-2 py-2 text-xs font-medium uppercase tracking-wide text-muted;
+  }
+  .table td {
+    @apply whitespace-nowrap border-b border-line/60 px-2 py-2 tabular-nums;
+  }
+  .seg {
+    @apply inline-flex rounded-lg border border-line bg-panel2 p-0.5;
+  }
+  .seg > button {
+    @apply rounded-md px-3 py-1.5 text-sm text-muted;
+  }
+  .seg > button[aria-pressed="true"] {
+    @apply bg-panel text-fg shadow;
+  }
+}

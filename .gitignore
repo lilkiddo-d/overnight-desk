@@ -1,0 +1,12 @@
+node_modules/
+contracts/out/
+contracts/cache/
+contracts/broadcast/*/31337/
+contracts/lcov.info
+app/.next/
+app/out/
+.env
+.env.local
+*.log
+deployments/*.dryrun.json
+app/public/deployments/*.dryrun.json

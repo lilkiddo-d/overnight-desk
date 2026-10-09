@@ -1,0 +1,113 @@
+{
+  "chainId": 4663,
+  "name": "Robinhood Chain",
+  "stablecoin": "0x5fc5360D0400a0Fd4f2af552ADD042D716F1d168",
+  "stablecoinSymbol": "USDG",
+  "clock": {
+    "interval": 86400,
+    "commitWindow": 64800,
+    "revealWindow": 7200,
+    "clearWindow": 86400,
+    "genesisHourUtc": 18
+  },
+  "marketHours": {
+    "open": 0,
+    "close": 86400,
+    "daysMask": 31,
+    "enforced": true
+  },
+  "params": {
+    "minOrderSize": 100000000,
+    "maxRateBps": 5000,
+    "auctionFeeBpsPerYear": 25,
+    "noRevealPenaltyBps": 100,
+    "maxOrdersPerSide": 50,
+    "marginCallGracePeriod": 14400,
+    "maturityGracePeriod": 14400
+  },
+  "terms": [
+    { "duration": 86400, "label": "Overnight" },
+    { "duration": 604800, "label": "7D" },
+    { "duration": 2592000, "label": "30D" },
+    { "duration": 7776000, "label": "90D" }
+  ],
+  "assets": [
+    {
+      "feed": "0x4A1166a659A55625345e9515b32adECea5547C38",
+      "initialHaircutBps": 3500,
+      "liquidationPenaltyBps": 500,
+      "maintenanceHaircutBps": 2500,
+      "maxCollateralPerAuction": 0,
+      "maxStaleness": 93600,
+      "maxStalenessClosed": 302400,
+      "symbol": "TSLA",
+      "token": "0x322F0929c4625eD5bAd873c95208D54E1c003b2d"
+    },
+    {
+      "feed": "0x6B22A786bAa607d76728168703a39Ea9C99f2cD0",
+      "initialHaircutBps": 3000,
+      "liquidationPenaltyBps": 500,
+      "maintenanceHaircutBps": 2000,
+      "maxCollateralPerAuction": 0,
+      "maxStaleness": 93600,
+      "maxStalenessClosed": 302400,
+      "symbol": "AAPL",
+      "token": "0xaF3D76f1834A1d425780943C99Ea8A608f8a93f9"
+    },
+    {
+      "feed": "0x379EC4f7C378F34a1B47E4F3cbeBCbAC3E8E9F15",
+      "initialHaircutBps": 3500,
+      "liquidationPenaltyBps": 500,
+      "maintenanceHaircutBps": 2500,
+      "maxCollateralPerAuction": 0,
+      "maxStaleness": 93600,
+      "maxStalenessClosed": 302400,
+      "symbol": "NVDA",
+      "token": "0xd0601CE157Db5bdC3162BbaC2a2C8aF5320D9EEC"
+    },
+    {
+      "feed": "0x319724394D3A0e3669269846abE664Cd621f9f6A",
+      "initialHaircutBps": 2000,
+      "liquidationPenaltyBps": 400,
+      "maintenanceHaircutBps": 1200,
+      "maxCollateralPerAuction": 0,
+      "maxStaleness": 93600,
+      "maxStalenessClosed": 302400,
+      "symbol": "SPY",
+      "token": "0x117cc2133c37B721F49dE2A7a74833232B3B4C0C"
+    },
+    {
+      "feed": "0xD5a1508ceD74c084eBf3cBe853e2C968fB2a651C",
+      "initialHaircutBps": 3000,
+      "liquidationPenaltyBps": 500,
+      "maintenanceHaircutBps": 2000,
+      "maxCollateralPerAuction": 0,
+      "maxStaleness": 93600,
+      "maxStalenessClosed": 302400,
+      "symbol": "AMZN",
+      "token": "0x12f190a9F9d7D37a250758b26824B97CE941bF54"
+    },
+    {
+      "feed": "0x45C3C877C15E6BA2EBB19eA114Ea508d14C1Af2E",
+      "initialHaircutBps": 3000,
+      "liquidationPenaltyBps": 500,
+      "maintenanceHaircutBps": 2000,
+      "maxCollateralPerAuction": 0,
+      "maxStaleness": 93600,
+      "maxStalenessClosed": 302400,
+      "symbol": "MSFT",
+      "token": "0xe93237C50D904957Cf27E7B1133b510C669c2e74"
+    },
+    {
+      "feed": "0xF6f373a037c30F0e5010d854385cA89185AE638b",
+      "initialHaircutBps": 3000,
+      "liquidationPenaltyBps": 500,
+      "maintenanceHaircutBps": 2000,
+      "maxCollateralPerAuction": 0,
+      "maxStaleness": 93600,
+      "maxStalenessClosed": 302400,
+      "symbol": "GOOGL",
+      "token": "0x2e0847E8910a9732eB3fb1bb4b70a580ADAD4FE3"
+    }
+  ]
+}

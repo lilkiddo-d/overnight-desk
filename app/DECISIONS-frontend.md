@@ -1,0 +1,33 @@
+# Frontend decisions
+
+- Next.js 15.5 App Router with every data page as a client component, because all reads come from wagmi hooks and there is no backend.
+- Tailwind CSS v4 (CSS-first `@theme` tokens, `@tailwindcss/postcss`), because it needs no JS config and is the current stable major.
+- ESLint 9 flat config wrapping `next/core-web-vitals` + `next/typescript` via FlatCompat, because that is what `next build` lints with in 15.x.
+- `"type": "module"` in app/package.json, so `node --test` can load the `.ts` test files as ESM through Node's built-in type stripping (no vitest/tsx dependency).
+- `allowImportingTsExtensions` is on and the lib modules under test only import `viem` or each other with `.ts` extensions, because Node's type stripping needs explicit extensions.
+- Commitment test vectors were derived without viem: a hand-built ABI encoding hashed by anvil's `web3_sha3`. Vector 1 was also confirmed against the deployed `AuctionHouse.commitmentHash` on the local fork using that public test vector, because `cast` is blocked by Windows Application Control on this machine.
+- Chain definitions are copied into `app/src/config/chains.ts` instead of imported from `/config/chains.ts`, because a Vercel build rooted at `app/` cannot import files outside the package (and the root file imports contracts JSON).
+- The local fork chain (31337) is only offered when `NEXT_PUBLIC_CHAIN_ID=31337`, so production builds never show a localhost network.
+- App chain = the wallet's chain if it is supported, otherwise the configured default, so reads keep working while the wallet is on a wrong network and the network guard prompts a switch.
+- Without `NEXT_PUBLIC_WC_PROJECT_ID`, only the injected and Rabby wallets are listed (via `connectorsForWallets` with a placeholder id that no listed wallet uses), so the build never fails for lack of a WalletConnect id.
+- Connectors are built only in the browser (empty list during SSR), to avoid window-only wallet code during prerender.
+- The deployment JSON is validated (addresses checksummed, chainId must match). `collateral` is accepted as an object or a JSON string, because foundry's `serializeString` nests objects. A missing file, an HTML 404 or an error each get a clear state.
+- Phase and countdowns are computed from MarketClock's immutables (genesis/interval/windows), mirroring the contract, with chain time = wall clock shifted forward only when the latest block is ahead (warped fork / skewed device), because an idle chain's last block timestamp is stale. The on-chain `phase(currentEpoch)` is read every 5s and shown on the dashboard when it disagrees.
+- The commit flow reads `currentEpoch()` and `phase()` from the contract right before hashing (these calls reveal nothing secret), so the commitment's epoch always matches what `commit*()` records even if the device clock is off.
+- The order secret (rate, salt, commitment) is saved to localStorage BEFORE the commit transaction is sent, and the orderId is attached afterwards from the `OrderCommitted` event, so a crash between send and receipt never loses the secret.
+- Stored secrets are matched to on-chain orders by commitment hash (not only orderId), and every stored or imported record is re-hashed and rejected if it does not match its commitment.
+- Approvals are for the exact amount (no unlimited allowances), and the button chains approve -> action in one click (two wallet prompts).
+- Full repayment approves debt + 15 minutes of interest + 1 unit, because `repay` caps the transfer at the actual debt, so the buffer is never spent.
+- Withdraw-max keeps the initial margin for the debt plus one hour of interest, to avoid an `InitialMarginBreached` revert from interest accrued while the tx is pending.
+- Reveal, cancel, settle, repay, add collateral, claim, redeem, cancel listing, unstake and withdraw do NOT require the risk acknowledgment, because unwinding or protecting an existing position must never be blocked by the UI. New orders, borrowing, buying, listing, staking and auto-roll do require it.
+- A borrow commit is blocked when the collateral is below the initial margin at the current oracle price, or when the oracle is unavailable, because such bids are excluded at clearing anyway.
+- Note-market buy uses `maxPriceE18 = listing price` and the quote's exact cost for approval, so a seller re-pricing cannot charge more than shown.
+- Liquidation buy: take = min(input, collateral left, collateral needed to cover debt + penalty), maxPrice = current price × (1 + slippage), and approval = cost at maxPrice (capped at the amount owed), with deadline = chain now + 5 min.
+- Implied note yield is simple annualised: (V/p − 1) × 365/daysLeft with V = 1 + rate × term/365, as specified. It ignores early repayment and bad debt, and the disclosure says so.
+- Lists scan at most the latest 400 series, 200 listings, 100 liquidation auctions and the 50–60 newest orders/repos per user, to keep multicalls bounded without an indexer.
+- The geoblock lives in `src/middleware.ts` and reads `NEXT_PUBLIC_GEOBLOCK_COUNTRIES` (inlined at build) and `x-vercel-ip-country`. It skips /blocked, /risk, Next internals, static files and /deployments.
+- The risk acknowledgment is versioned (`RISK_VERSION`), so a material change to the disclosure can force everyone to re-accept. It is not shown automatically on /risk or /blocked.
+- /stake is shown only when `NEXT_PUBLIC_PROJECT_TOKEN` is a valid address AND `ProjectTokenHooks.isActive()`. The staked token address used for approvals is read on-chain (`projectToken()`), not taken from the env var.
+- The logo is a generic crescent-moon mark and the name is "Overnight Desk". The only Robinhood references are the chain's network name and the issuer-docs URL in the disclosure, with an explicit non-affiliation note.
+- Security headers (X-Frame-Options DENY, nosniff, referrer policy) and `no-store` on `/deployments/*` are set in next.config.mjs, because a stale address file would be dangerous.
+- Webpack aliases stub the optional `@x402/*` packages imported by `@coinbase/cdp-sdk` (pulled in by wagmi's Base Account connector), because they are not installed and this app never uses x402 payments.

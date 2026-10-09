@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "app-fork",
+      "runtimeExecutable": "C:/Program Files/nodejs/node.exe",
+      "runtimeArgs": ["app/node_modules/next/dist/bin/next", "dev", "app", "--port", "3107"],
+      "port": 3107
+    }
+  ]
+}
